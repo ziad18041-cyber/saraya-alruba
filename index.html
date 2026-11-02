@@ -74,6 +74,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .bn.hide{visibility:hidden}
 .map.am-on .tag,.map.am-on .lead{opacity:.28}
 .map.am-on .tag{pointer-events:none}
+.pin,.pinl,.blip,.bn{transition:opacity .22s,box-shadow .22s}
+.map.focus .blip.sch:not(.on):not(.lit),.map.focus .bn.sch:not(.on):not(.lit),.map.focus .pin:not(.on),.map.focus .pinl:not(.on){opacity:.22}
+.map.focus .pin:not(.on)::after{animation:none;opacity:0}
+.map.focus .blip:hover,.map.focus .pin:hover{opacity:1}
+.pin.on{box-shadow:0 0 0 3px var(--gold),0 0 30px 12px #f3c548b0}
+.blip.sch.on{box-shadow:0 0 0 2px var(--gold),0 0 20px 8px #f3c548a0}
 #amlines{display:none}
 .turf,.casing,.road{transition:opacity .22s}
 .tag{transition:opacity .22s}
@@ -371,10 +377,11 @@ function go(s,keep){pinned=!!keep;
   const dn=s?(s.t==='d'?s.n:s.t==='s'?SCH[s.i].d:null):null;
   setWant(dn&&SONG_DATA[dn]?dn:null);
   $('radioText').innerHTML=dn?(SONG_DATA[dn]?`راديو <span>${dn}</span>`:`<span>${dn}</span>: الأغنية قريبًا`):s?'<span>سرايا الربى</span>':'اختر حيًا لسماع أغنيته';
-  map.classList.toggle('focus',!!dn&&pinned);
+  map.classList.toggle('focus',!!s&&pinned);
+  const isP=!!s&&s.t==='p';pin.classList.toggle('on',isP);pinl.classList.toggle('on',isP);
+  SCH.forEach((x,i)=>{const on=!!s&&s.t==='s'&&s.i===i,lit=!!s&&s.t==='d'&&x.d===dn;[x.el.b,x.el.l].forEach(e=>{e.classList.toggle('on',on);e.classList.toggle('lit',lit)})});
   if(same(s,sel))return;sel=s;
   for(const n in gs){const on=n===dn;gs[n].classList.toggle('on',on);tagEls[n].classList.toggle('on',on);if(on)gs[n].parentNode.appendChild(gs[n])}
-  SCH.forEach((x,i)=>x.el.b.classList.toggle('on',!!s&&s.t==='s'&&s.i===i));
   blips.forEach(o=>o.b.classList.remove('flash'));
   const was=map.classList.contains('am-on');map.classList.toggle('am-on',!!s&&s.t==='p');if(was!==map.classList.contains('am-on'))fit();else draw();render();
   const z=$('zone');z.classList.remove('show');const lab=s?(s.t==='d'?s.n:s.t==='s'?SCH[s.i].short:'سرايا الربى'):'';if(lab){z.textContent=lab;void z.offsetWidth;z.classList.add('show')}
