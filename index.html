@@ -75,6 +75,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .map.am-on .tag,.map.am-on .lead{opacity:.28}
 .map.am-on .tag{pointer-events:none}
 #amlines{display:none}
+.turf,.casing,.road{transition:opacity .22s}
+.tag{transition:opacity .22s}
+.map.focus .g:not(.on) .turf{opacity:.1}
+.map.focus .g:not(.on) .casing,.map.focus .g:not(.on) .road{opacity:.25}
+.map.focus .lead{opacity:.08}
+.map.focus .tag:not(.on){opacity:.32}
+.map.focus .tag:not(.on):hover,.map.focus .tag:not(.on):focus-visible{opacity:1}
 .map.am-on #amlines{display:block}
 .amline{stroke:var(--gold);stroke-width:1;stroke-dasharray:3 4;opacity:.65;vector-effect:non-scaling-stroke}
 .row .gl{width:26px;height:26px;border-radius:50%;background:#f3f0e6;border:2px solid #000;display:grid;place-items:center;font:400 14px/1 system-ui,sans-serif;color:#000}
@@ -364,6 +371,7 @@ function go(s,keep){pinned=!!keep;
   const dn=s?(s.t==='d'?s.n:s.t==='s'?SCH[s.i].d:null):null;
   setWant(dn&&SONG_DATA[dn]?dn:null);
   $('radioText').innerHTML=dn?(SONG_DATA[dn]?`راديو <span>${dn}</span>`:`<span>${dn}</span>: الأغنية قريبًا`):s?'<span>سرايا الربى</span>':'اختر حيًا لسماع أغنيته';
+  map.classList.toggle('focus',!!dn&&pinned);
   if(same(s,sel))return;sel=s;
   for(const n in gs){const on=n===dn;gs[n].classList.toggle('on',on);tagEls[n].classList.toggle('on',on);if(on)gs[n].parentNode.appendChild(gs[n])}
   SCH.forEach((x,i)=>x.el.b.classList.toggle('on',!!s&&s.t==='s'&&s.i===i));
