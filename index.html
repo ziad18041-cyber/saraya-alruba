@@ -143,7 +143,7 @@ dl{margin:0}
 .sec u i{display:block;height:100%;background:var(--road)}
 .warn{font-size:12.5px;color:var(--t3)}
 .rows{display:flex;flex-direction:column}
-.row{display:grid;grid-template-columns:minmax(0,1fr) 64px auto;gap:10px;align-items:center;padding:7px 2px;border-bottom:1px solid var(--line);text-align:right;width:100%}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:7px 2px;border-bottom:1px solid var(--line);text-align:right;width:100%}
 .row:hover{background:#ffffff0d}
 .row span:first-child{font:400 18px/1.1 var(--display)}
 .row .bar{margin:0}
@@ -159,8 +159,7 @@ dl{margin:0}
   .pin{width:24px;height:24px;margin:-12px 0 0 -12px;font-size:12px;border-width:2px}
   .pinl{font-size:11px}.pinl small{display:none}
   .blip{width:24px;height:24px;margin:-12px 0 0 -12px;font-size:13px}
-  .row{grid-template-columns:minmax(0,1fr) 64px auto}
-  .row .bar{width:64px}.row .st{font-size:12px}
+  .row .st{font-size:12px}
   .radio{font-size:15px;padding:5px 10px}
   .sound{right:max(10px,env(safe-area-inset-right,0px));bottom:10px;font-size:15px;padding:7px 12px}
   .scale{bottom:8px}
@@ -218,27 +217,26 @@ const AM=[
 const dist=(a,b,c,e)=>{const r=Math.PI/180,x=(e-b)*r*Math.cos((a+c)/2*r),y=(c-a)*r;return 6371*Math.hypot(x,y)};
 AM.forEach(a=>a.km=dist(PROJECT.lat,PROJECT.lon,a.lat,a.lon));AM.sort((x,y)=>x.km-y.km);
 const D=[
-{n:"النظيم",pop:120.7,sa:65.5,m:58.8,inc:8191,incS:8847,incN:3091,poi:"قرابة 2,000",com:62.5,srv:22.2,ent:6.8,risk:65,ok:45,lab:[46.985,24.875],
- say:"كثير يشوفونه حي انتقالي بسبب الشوارع والمطبات والتفحيط والإيجارات العالية مقارنة بالجودة، مع نشاط عقاري قوي. تقييم عقار: الشوارع 50% والعام 70%.",q:"اخطر حي شفته بحياتي"},
-{n:"الجنادرية",pop:70.9,sa:68.9,m:60,inc:8212,incS:8684,incN:2735,poi:"935",com:68,srv:21.8,ent:.9,risk:30,ok:70,lab:[46.915,24.872],
+{n:"النظيم",pop:120.7,sa:65.5,m:58.8,inc:8191,incS:8847,incN:3091,poi:"قرابة 2,000",com:62.5,srv:22.2,ent:6.8,ok:45,lab:[46.985,24.875],
+ say:"كثير يشوفونه حي انتقالي بسبب الشوارع والمطبات والتفحيط والإيجارات العالية مقارنة بالجودة، مع نشاط عقاري قوي. تقييم عقار: الشوارع 50% والعام 70%."},
+{n:"الجنادرية",pop:70.9,sa:68.9,m:60,inc:8212,incS:8684,incN:2735,poi:"935",com:68,srv:21.8,ent:.9,ok:70,lab:[46.915,24.872],
  say:"أغلب الكلام إيجابي عن الهدوء والفرص، وفيه عقد مجمع تعليمي بقيمة 275.7 مليون ريال وبطاقة 1950 طالبًا. الشكوى الأبرز المخارج الضيقة والزحمة.",q:"هنالك طريق واحد فقط لكي تخرج الى طريق الدائري الشمالي والمخرج صغير جدا ومزدحم"},
-{n:"الندوة",pop:43.4,sa:66.2,m:60.9,inc:null,incS:null,incN:null,poi:"841",com:78,srv:16.1,ent:.5,risk:35,ok:60,lab:[46.905,24.812],
+{n:"الندوة",pop:43.4,sa:66.2,m:60.9,inc:null,incS:null,incN:null,poi:"841",com:78,srv:16.1,ent:.5,ok:60,lab:[46.905,24.812],
  say:"يُوصف بأنه هادئ وعائلي، والكلام أغلبه عن مشاريع سكنية وأراضٍ. لم تظهر شكاوى قوية في التغريدات الحديثة."},
-{n:"النسيم الشرقي",pop:139.9,sa:51.5,m:64.4,inc:8206,incS:9829,incN:3537,poi:"3,700",com:49.1,srv:43,ent:.6,risk:45,ok:58,lab:[46.915,24.712],
+{n:"النسيم الشرقي",pop:139.9,sa:51.5,m:64.4,inc:8206,incS:9829,incN:3537,poi:"3,700",com:49.1,srv:43,ent:.6,ok:58,lab:[46.915,24.712],
  say:"مكتظ، وزحمة مواقف، وتفحيط آخر الليل، ويحتاج تجديد بنية تحتية. ومع ذلك يمدح ناس توفر الخدمات. تقييم عقار 74 إلى 75%.",q:"كل حدائق النسيم الشرقي كذا وهي توها مستحدثه مالها الا سنه"},
-{n:"الرماية",pop:13.5,sa:32.7,m:46.3,inc:10500,incS:12200,incN:1303,poi:"58",com:12.1,srv:3.4,ent:24.1,risk:30,ok:62,lab:[46.945,24.752],warn:"أرقام الدخل هنا مبنية غالبًا على عدد قليل من العاملين، فلا تعتمد عليها في المقارنة.",
- say:"كلام إيجابي عن الموقع وفرص الأراضي، وقليل من الشكاوى الأمنية الظاهرة. الحي الذي يقع فيه مشروع سرايا الربى.",q:"حي الرماية حي حيوي… جميع الخدمات متوفرة فيه"},
-{n:"المعيزيلة",pop:22.6,sa:71.9,m:59.3,inc:9150,incS:11400,incN:2243,poi:"680",com:32.8,srv:19.7,ent:42.5,risk:32,ok:65,lab:[46.812,24.815],
+{n:"الرماية",pop:13.5,sa:32.7,m:46.3,inc:10500,incS:12200,incN:1303,poi:"58",com:12.1,srv:3.4,ent:24.1,ok:62,lab:[46.945,24.752],warn:"أرقام الدخل هنا مبنية غالبًا على عدد قليل من العاملين، فلا تعتمد عليها في المقارنة.",
+ say:"كلام إيجابي عن الموقع وفرص الأراضي، والشكاوى الظاهرة قليلة. الحي الذي يقع فيه مشروع سرايا الربى.",q:"حي الرماية حي حيوي… جميع الخدمات متوفرة فيه"},
+{n:"المعيزيلة",pop:22.6,sa:71.9,m:59.3,inc:9150,incS:11400,incN:2243,poi:"680",com:32.8,srv:19.7,ent:42.5,ok:65,lab:[46.812,24.815],
  say:"موقع استراتيجي قرب طريق الجنادرية، والحديث يتركز على مشاريع مثل جواهر الشرق ومخطط الأفق. أغلب التغريدات إعلانات عقارية."},
-{n:"النهضة",pop:99.1,sa:61.7,m:58.9,inc:9240,incS:12000,incN:3552,poi:"2,100",com:51.3,srv:36.1,ent:5,risk:38,ok:60,lab:[46.772,24.768],
+{n:"النهضة",pop:99.1,sa:61.7,m:58.9,inc:9240,incS:12000,incN:3552,poi:"2,100",com:51.3,srv:36.1,ent:5,ok:60,lab:[46.772,24.768],
  say:"التغريدات المباشرة عن السكن فيه قليلة، وفيه نشاط عقاري متوسط."},
-{n:"السعادة",pop:83.2,sa:46.4,m:68.9,inc:8321,incS:9775,incN:3369,poi:"3,500",com:38.6,srv:42.2,ent:9,risk:30,ok:65,lab:[46.89,24.672],
+{n:"السعادة",pop:83.2,sa:46.4,m:68.9,inc:8321,incS:9775,incN:3369,poi:"3,500",com:38.6,srv:42.2,ent:9,ok:65,lab:[46.89,24.672],
  say:"مثال إيجابي على توفر الخدمات اليومية، وأغلب بقية التغريدات عقارية عن شقق ودور للبيع والإيجار.",q:"الخدمات حولنا متوفرة سوق الغنم والمسلخ ومؤخرا فتح عندنا بيت الشاورما"},
-{n:"النسيم الغربي",pop:159.9,sa:49.2,m:63.5,inc:7105,incS:8943,incN:3376,poi:"3,400",com:53.5,srv:35.9,ent:1.2,risk:42,ok:55,lab:[46.772,24.722],
- say:"حي قديم ومكتظ، والخدمات موجودة لكن البنية تحتاج تحديث. الكلام عن الأمن والرضا فيه قليل."}
+{n:"النسيم الغربي",pop:159.9,sa:49.2,m:63.5,inc:7105,incS:8943,incN:3376,poi:"3,400",com:53.5,srv:35.9,ent:1.2,ok:55,lab:[46.772,24.722],
+ say:"حي قديم ومكتظ، والخدمات موجودة لكن البنية تحتاج تحديث. الكلام المباشر عن الرضا فيه قليل."}
 ];
 const byN=Object.fromEntries(D.map(d=>[d.n,d]));
-const riskLv=r=>r>=60?5:r>=50?4:r>=40?3:r>=35?2:1; /* turf colour */
 const stars=ok=>ok>=70?5:ok>=60?4:ok>=50?3:2; /* 70+ five, 60-69 four, 50-59 three, under 50 two */
 const starsH=(ok,pct=true)=>{const s=stars(ok);return `<span class="st" aria-label="${s} نجوم، رضا ${ok}%">${'★'.repeat(s)}<s>${'★'.repeat(5-s)}</s>${pct?`<em>${ok}%</em>`:''}</span>`};
 const money=v=>v==null?'غير متوفر':v.toLocaleString('en-US')+' ر.س';
@@ -264,14 +262,14 @@ GEO.features.forEach(f=>{
   const name=f.properties.name_ar,d=byN[name];
   const path=rings(f).map(pl=>pl.map(r=>'M'+r.map(c=>{const q=P(...c);ext(q);return q.map(v=>v.toFixed(3)).join(' ')}).join('L')+'Z').join('')).join('');
   const g=el('g',{class:'g'},turfs);
-  const t=el('path',{d:path,class:'turf d',fill:`url(#h${riskLv(d.risk)})`},g);
+  const t=el('path',{d:path,class:'turf d',fill:`url(#h${6-stars(d.ok)})`},g);
   el('path',{d:path,class:'casing'},g);el('path',{d:path,class:'road'},g);
   gs[name]=g;d.c=centroid(f);d.f=f;bind(t,name);
   const L=P(...d.lab);ext(L);
   if(Math.hypot(L[0]-d.c[0],L[1]-d.c[1])>3)el('line',{x1:d.c[0],y1:d.c[1],x2:L[0],y2:L[1],class:'lead'},leads);
   const b=document.createElement('button');b.className='tag';b.dataset.n=name;
-  b.innerHTML=`<b>${name}</b>${starsH(d.ok)}<span class="bar"><i style="width:${d.risk}%"></i></span>`;
-  b.setAttribute('aria-label',`${name}: رضا ${d.ok}%، خطورة ${d.risk}%`);
+  b.innerHTML=`<b>${name}</b>${starsH(d.ok)}`;
+  b.setAttribute('aria-label',`${name}: رضا ${d.ok}%`);
   tags.appendChild(b);tagEls[name]=b;d.L=L;bind(b,name);
 });
 const pinAt=P(PROJECT.lon,PROJECT.lat);
@@ -392,14 +390,14 @@ function render(){const s=$('sheet');s.scrollTop=0;s.innerHTML=!sel?home():sel.t
   s.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>go({t:'p'},true));
   s.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>flash(AM[+b.dataset.a]));
   s.querySelectorAll('[data-h]').forEach(b=>b.onclick=()=>go(null,false))}
-const NOTE=`<p class="mut">النجوم والخطورة تقديرات تقريبية من تغريدات X وتقييمات عقار، وليست إحصاءً رسميًا. السكان والدخل ونقاط الاهتمام من منصة زاد، وبعض الأعداد مقرّبة.</p>`;
+const NOTE=`<p class="mut">النجوم والرضا تقديرات تقريبية من تغريدات X وتقييمات عقار، وليست إحصاءً رسميًا. السكان والدخل ونقاط الاهتمام من منصة زاد، وبعض الأعداد مقرّبة.</p>`;
 const FACTS=`<div class="facts"><div><strong>1,155</strong><span class="mut">وحدة سكنية</span></div><div><strong>قرابة مليون م²</strong><span class="mut">مساحة المشروع</span></div></div>`;
 function home(){
-  const rows=[...D].sort((x,y)=>y.ok-x.ok||x.risk-y.risk).map(d=>`<button class="row" data-d="${d.n}"><span>${d.n}</span><span class="bar"><i style="width:${d.risk}%"></i></span>${starsH(d.ok)}</button>`).join('');
+  const rows=[...D].sort((x,y)=>y.ok-x.ok).map(d=>`<button class="row" data-d="${d.n}"><span>${d.n}</span>${starsH(d.ok)}</button>`).join('');
   const sc=SCH.map((s,i)=>`<button class="row amr" data-s="${i}"><span class="gl s">${CAP}</span><span>${s.short}، ${s.d}</span><span class="km">${s.top.replace(' على المملكة','').replace('المركز ','#').replace(' بين الحكومية',' حكومية')}</span></button>`).join('');
   return `<h1>سرايا الربى</h1><p>داخل وجهة الربى في حي الرماية، شرق الرياض، وحوله ثمانية أحياء، والتسعة كلها في هذه الدراسة.</p>${FACTS}
   <button class="cta" data-p="1">اعرض الخدمات القريبة من المشروع</button>
-  <div><h3>الأحياء</h3><p class="mut">النجوم للرضا، وكلما زادت كان الحي أفضل. الشريط الأحمر للخطورة. مرّر على الحي أو المسه.</p></div>
+  <div><h3>الأحياء</h3><p class="mut">النجوم للرضا، وكلما زادت كان الحي أفضل. مرّر على الحي أو المسه.</p></div>
   <div class="rows">${rows}</div>
   <div><h3>مدارس ضمن قوائم أفضل 100</h3><p class="mut">كل المدارس المؤكدة في الأحياء التسعة، من دليل مؤشر ترتيب 2025.</p></div><div class="rows">${sc}</div>${NOTE}`}
 function keys(){const near=c=>AM.find(a=>a.c===c);const card=(c,lab,main)=>{const a=near(c);return `<button class="keyc${main?' main':''}" data-a="${AM.indexOf(a)}"><i>${CAT[c][0]}</i><b>${a.km.toFixed(1)} كم</b><span>${lab}: ${a.s}</span></button>`};
@@ -418,8 +416,7 @@ function school(s){const rows=s.ranks.map(([l,c,r,v,a])=>`<div class="rk"><span>
   <p class="mut">الدرجة متوسط طالبات المدرسة، وليست تقييمًا شاملًا لها. موقع المدرسة من Google Maps.</p>`}
 function detail(d){const sec=(l,v)=>`<div class="sec"><span>${l}</span><u><i style="width:${v}%"></i></u><span class="num">${v}%</span></div>`;
   return `<button class="back" data-h="1">كل الأحياء</button><h2>${d.n}</h2>
-  <div class="meter"><span>الرضا</span>${starsH(d.ok,false)}<span class="num">${d.ok}%</span>
-  <span>الخطورة</span><span class="bar"><i style="width:${d.risk}%"></i></span><span class="num">${d.risk}%</span></div>
+  <div class="meter"><span>الرضا</span>${starsH(d.ok,false)}<span class="num">${d.ok}%</span></div>
   <div><h3>رأي الناس</h3><p>${d.say}</p></div>
   ${d.q?`<blockquote>«${d.q}»<small>تغريدة من X</small></blockquote>`:''}
   <div><h3>الأرقام</h3><dl class="stats">
