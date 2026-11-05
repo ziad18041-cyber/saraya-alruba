@@ -496,7 +496,7 @@ function detail(d){const sec=(l,v)=>`<div class="sec"><span>${l}</span><u><i sty
   <div><dt>السكان</dt><dd>${d.pop} ألف</dd></div><div><dt>السعوديون</dt><dd>${d.sa}%</dd></div>
   <div><dt>الذكور</dt><dd>${d.m}%</dd></div><div><dt>نقاط الاهتمام</dt><dd>${d.poi}</dd></div>
   <div><dt>دخل الفرد العامل</dt><dd>${money(d.inc)}</dd></div><div><dt>دخل السعوديين</dt><dd>${money(d.incS)}</dd></div>
-  <div><dt>دخل غير السعوديين</dt><dd>${money(d.incN)}</dd></div><div><dt>أغنية الحي</dt><dd>${SONG_DATA[d.n]?'متوفرة':'قريبًا'}</dd></div></dl></div>
+  <div style="grid-column:1/-1"><dt>دخل غير السعوديين</dt><dd>${money(d.incN)}</dd></div></dl></div>
   ${d.warn?`<p class="warn">${d.warn}</p>`:''}
   <div><h3>نقاط الاهتمام</h3>${sec('تجاري',d.com)}${sec('خدمات',d.srv)}${sec('ترفيه',d.ent)}</div>`}
 window.__aud=()=>({state:ctx&&ctx.state,cur:cur&&cur.n,want,heard,silent,btn:!$('sound').hidden,btnT:$('sound').textContent,html:!!htmlA});
